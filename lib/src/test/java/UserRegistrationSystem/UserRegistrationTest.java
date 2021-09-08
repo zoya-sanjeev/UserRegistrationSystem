@@ -4,9 +4,35 @@
 package UserRegistrationSystem;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
 public class UserRegistrationTest {
+	String email;
+	boolean expectedOutput;
+	static int count=0;
+	
+	public UserRegistrationTest(String email,boolean expectedOutput) {
+		this.email=email;
+		this.expectedOutput=expectedOutput;
+	}
+	
+	@Parameterized.Parameters
+	public static Collection input(){
+		return Arrays.asList(new Object[][] { { "abc@yahoo.com",true }, { "abc-100@yahoo.com",true }, { "abc.100@yahoo.com",true },
+			{ "abc111@abc.com",true }, { "abc-100@abc.net",true }, { "abc.100@abc.com.au",true }, { "abc@1.com",true },
+			{ "abc@gmail.com.com",true }, { "abc+100@gmail.com",true }, { "abc",false }, { "abc@.com.my",false }, { "abc123@gmail.a",false },
+			{ "abc123@.com",false }, { "abc123@.com.com",false }, { ".abc@abc.com",false }, { "abc()@gmail.com",false }, { "abc@%.com",false },
+			{ "abc..2002@gmail.com",false }, { "abc.@gmail.com",false }, { "abc@abc@gmail.com",false }, { "abc@gmail.com.1a",false },
+			{ "abc@gmail.com.aa.au",false } });
+	}
+	
     @Test public void validateName_ValidName_True() {
         UserRegistration userRegistration = new UserRegistration();
         assertTrue(userRegistration.validateName("Zoya"));
@@ -15,9 +41,10 @@ public class UserRegistrationTest {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validateName("zoya"));
     }
-    @Test public void validateEmail_ValidEmail_True() {
+    @Test public void validateEmail_ArrayOfValidAndInvalidEmails_TrueOrFalse() {
         UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validateEmail("abc@yahoo.com"));
+        System.out.println((count++) + email);
+        assertEquals(userRegistration.validateEmail(email),expectedOutput);
     }
     @Test public void validateEmail_InvalidEmail_False() {
         UserRegistration userRegistration = new UserRegistration();
