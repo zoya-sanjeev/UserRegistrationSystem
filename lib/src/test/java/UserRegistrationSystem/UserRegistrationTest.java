@@ -6,9 +6,9 @@ package UserRegistrationSystem;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class LibraryTest {
+public class UserRegistrationTest {
     @Test public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
+        UserRegistration classUnderTest = new UserRegistration();
         assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
     }
 }
