@@ -13,4 +13,5 @@ lib/.settings
 lib/bin
 lib/.classpath
 lib/.project
-
+.project
+lib/build.gradle
