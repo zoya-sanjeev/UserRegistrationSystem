@@ -11,7 +11,7 @@ public class UserRegistrationTest {
         UserRegistration userRegistration = new UserRegistration();
         assertTrue(userRegistration.validateName("Zoya"));
     }
-    @Test public void validateName_ValidName_False() {
+    @Test public void validateName_InvalidName_False() {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validateName("zoya"));
     }
@@ -19,7 +19,7 @@ public class UserRegistrationTest {
         UserRegistration userRegistration = new UserRegistration();
         assertTrue(userRegistration.validateEmail("abc@yahoo.com"));
     }
-    @Test public void validateEmail_ValidEmail_False() {
+    @Test public void validateEmail_InvalidEmail_False() {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validateEmail("1ds@hsj.com"));
     }	
@@ -27,8 +27,16 @@ public class UserRegistrationTest {
         UserRegistration userRegistration = new UserRegistration();
         assertTrue(userRegistration.validatePhone("91 1234567890"));
     }
-    @Test public void validateEmail_ValidPhone_False() {
+    @Test public void validateEmail_InvalidPhone_False() {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validatePhone("1234 90191"));
+    }
+    @Test public void validatePassword_ValidPassword_True() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertTrue(userRegistration.validatePassword("Password@123"));
+    }
+    @Test public void validateEmail_InvalidPassword_False() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertFalse(userRegistration.validatePassword("password"));
     }
 }
