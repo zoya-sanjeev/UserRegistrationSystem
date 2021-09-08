@@ -33,7 +33,7 @@ public class UserRegistrationTest {
     }
     @Test public void validatePassword_ValidPasswordLength_True() {
         UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Passwords1"));
+        assertTrue(userRegistration.validatePassword("Password1@#@"));
     }
     @Test public void validateEmail_InvalidPasswordLength_False() {
         UserRegistration userRegistration = new UserRegistration();
@@ -41,7 +41,7 @@ public class UserRegistrationTest {
     }
     @Test public void validatePassword_PasswordWithOneUpperCase_True() {
         UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Password1"));
+        assertTrue(userRegistration.validatePassword("Password@123"));
     }
     @Test public void validateEmail_PasswordWithNoUpperCase_False() {
         UserRegistration userRegistration = new UserRegistration();
@@ -49,10 +49,18 @@ public class UserRegistrationTest {
     }
     @Test public void validatePassword_PasswordWithOneDigit_True() {
         UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Password1"));
+        assertTrue(userRegistration.validatePassword("Password1@"));
     }
     @Test public void validateEmail_PasswordWithNoDigit_False() {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validatePassword("password"));
+    }
+    @Test public void validatePassword_PasswordWithOneSpecialCharacter_True() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertTrue(userRegistration.validatePassword("Password1@#@"));
+    }
+    @Test public void validateEmail_PasswordWithNoSpecialCharacter_False() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertFalse(userRegistration.validatePassword("Password"));
     }
 }
