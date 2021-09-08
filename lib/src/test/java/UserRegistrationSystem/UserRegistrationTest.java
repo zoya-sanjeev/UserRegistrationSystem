@@ -31,12 +31,20 @@ public class UserRegistrationTest {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validatePhone("1234 90191"));
     }
-    @Test public void validatePassword_ValidPassword_True() {
+    @Test public void validatePassword_ValidPasswordLength_True() {
         UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Password@123"));
+        assertTrue(userRegistration.validatePassword("Passwords"));
     }
-    @Test public void validateEmail_InvalidPassword_False() {
+    @Test public void validateEmail_InvalidPasswordLength_False() {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validatePassword("passw"));
+    }
+    @Test public void validatePassword_PasswordWithOneUpperCase_True() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertTrue(userRegistration.validatePassword("Password"));
+    }
+    @Test public void validateEmail_PasswordWithNoUpperCase_False() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertFalse(userRegistration.validatePassword("password"));
     }
 }
