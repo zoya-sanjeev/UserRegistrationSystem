@@ -37,6 +37,6 @@ public class UserRegistrationTest {
     }
     @Test public void validateEmail_InvalidPassword_False() {
         UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validatePassword("password"));
+        assertFalse(userRegistration.validatePassword("passw"));
     }
 }
