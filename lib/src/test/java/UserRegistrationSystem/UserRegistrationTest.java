@@ -9,10 +9,18 @@ import static org.junit.Assert.*;
 public class UserRegistrationTest {
     @Test public void validateName_ValidName_True() {
         UserRegistration userRegistration = new UserRegistration();
-        assertTrue("For name=Zoya", userRegistration.validateName("Zoya"));
+        assertTrue(userRegistration.validateName("Zoya"));
     }
     @Test public void validateName_ValidName_False() {
         UserRegistration userRegistration = new UserRegistration();
-        assertFalse("For name=zoya", userRegistration.validateName("zoya"));
+        assertFalse(userRegistration.validateName("zoya"));
     }
+    @Test public void validateEmail_ValidEmail_True() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertTrue(userRegistration.validateEmail("abc@yahoo.com"));
+    }
+    @Test public void validateEmail_ValidEmail_False() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertFalse(userRegistration.validateEmail("1ds@hsj.com"));
+    }	
 }
