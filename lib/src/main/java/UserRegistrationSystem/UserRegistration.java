@@ -15,4 +15,9 @@ public class UserRegistration {
 		String emailValidation="^[a-zA-Z]{1,}[\\.\\_\\-\\+]?[a-zA-Z0-9]*[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]{2}$";
 		return Pattern.matches(emailValidation,email);
 	}
+	
+	public static boolean validatePhone(String phoneNumber) {
+		String phoneValidation="^[0-9]{2,3}\\s[0-9]{10}$";
+		return Pattern.matches(phoneValidation,phoneNumber);
+	}
 }
