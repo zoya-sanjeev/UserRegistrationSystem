@@ -10,4 +10,9 @@ public class UserRegistration {
 		String nameValidation="^[A-Z][a-z]{2,}$";
 		return Pattern.matches(nameValidation, name);
 	}
+	
+	public static boolean validateEmail(String email) {
+		String emailValidation="^[a-zA-Z]{1,}[\\.\\_\\-\\+]?[a-zA-Z0-9]*[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]{2}$";
+		return Pattern.matches(emailValidation,email);
+	}
 }
