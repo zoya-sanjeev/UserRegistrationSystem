@@ -7,8 +7,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class UserRegistrationTest {
-    @Test public void testSomeLibraryMethod() {
-        UserRegistration classUnderTest = new UserRegistration();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+    @Test public void validateName_ValidName_True() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertTrue("For name=Zoya", userRegistration.validateName("Zoya"));
     }
 }
