@@ -11,4 +11,8 @@ public class UserRegistrationTest {
         UserRegistration userRegistration = new UserRegistration();
         assertTrue("For name=Zoya", userRegistration.validateName("Zoya"));
     }
+    @Test public void validateName_ValidName_False() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertFalse("For name=zoya", userRegistration.validateName("zoya"));
+    }
 }
