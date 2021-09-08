@@ -23,4 +23,12 @@ public class UserRegistrationTest {
         UserRegistration userRegistration = new UserRegistration();
         assertFalse(userRegistration.validateEmail("1ds@hsj.com"));
     }	
+    @Test public void validatePhone_ValidPhone_True() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertTrue(userRegistration.validatePhone("91 1234567890"));
+    }
+    @Test public void validateEmail_ValidPhone_False() {
+        UserRegistration userRegistration = new UserRegistration();
+        assertFalse(userRegistration.validatePhone("1234 90191"));
+    }
 }
