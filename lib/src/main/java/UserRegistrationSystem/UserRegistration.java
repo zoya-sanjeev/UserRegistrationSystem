@@ -33,9 +33,16 @@ public class UserRegistration {
 		}
 	}
 	
-	public static boolean validatePhone(String phoneNumber) {
-		String phoneValidation="^[0-9]{2,3}\\s[0-9]{10}$";
-		return Pattern.matches(phoneValidation,phoneNumber);
+	public static boolean validatePhone(String phoneNumber) throws UserRegistrationException {
+		try {
+			String phoneValidation="^[0-9]{2,3}\\s[0-9]{10}$";
+			if(Pattern.matches(phoneValidation,phoneNumber))
+				return true;
+			else
+				throw new UserRegistrationException("Enter phone number in proper format",ExceptionType.PHONE_INVALID);
+		}catch(NullPointerException e) {
+			throw new UserRegistrationException("Enter phone number in proper format",ExceptionType.PHONE_NULL);
+		}
 	}
 	
 	public static boolean validatePassword(String password) {
