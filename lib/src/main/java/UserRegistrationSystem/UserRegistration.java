@@ -46,7 +46,10 @@ public class UserRegistration {
 	}
 	
 	public static boolean validatePassword(String password) {
-		String passwordValidation="^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+		String passwordLengthValidation=".{8,}";
+		String passwordUpperCaseValidation="(?=.*[A-Z])";
+		String passwordSpecialCharValidation="(?=.*[@#$%^&+=])";
+		String passwordDigitValidation="(?=.*[0-9])";
 		return Pattern.matches(passwordValidation,password);
 	}
 }
