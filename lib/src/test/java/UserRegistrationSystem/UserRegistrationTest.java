@@ -3,6 +3,7 @@
  */
 package UserRegistrationSystem;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -34,12 +35,31 @@ public class UserRegistrationTest {
 	}
 	
     @Test public void validateName_ValidName_True() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validateName("Zoya"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertTrue(userRegistration.validateName("Zoya"));
+		} catch (UserRegistrationException e) {
+			
+		}
     }
     @Test public void validateName_InvalidName_False() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validateName("zoya"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			userRegistration.validateName("zoya");
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.NAME_INVALID, e.type);
+		}
+    }
+    @Test public void validateName_NullName_False() {
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			userRegistration.validateName(null);
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.NAME_NULL, e.type);
+		}
     }
     @Test public void validateEmail_ArrayOfValidAndInvalidEmails_TrueOrFalse() {
         UserRegistration userRegistration = new UserRegistration();
