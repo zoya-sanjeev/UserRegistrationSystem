@@ -21,9 +21,16 @@ public class UserRegistration {
 		}
 	}
 	
-	public static boolean validateEmail(String email) {
+	public static boolean validateEmail(String email) throws UserRegistrationException {
+		try {
 		String emailValidation="^[a-zA-Z]{1,}([\\.\\_\\-\\+]?[a-zA-Z0-9]+)@[a-z0-9]+[.][a-z]+[.]?[a-z]{2,3}?$";
-		return Pattern.matches(emailValidation,email);
+		if(Pattern.matches(emailValidation,email))
+			return true;
+		else
+			throw new UserRegistrationException("Enter email in proper format", ExceptionType.EMAIL_INVALID);
+		}catch(NullPointerException e) {
+			throw new UserRegistrationException("Enter name in proper format",ExceptionType.EMAIL_NULL);
+		}
 	}
 	
 	public static boolean validatePhone(String phoneNumber) {
