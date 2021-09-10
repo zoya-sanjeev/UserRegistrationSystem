@@ -4,7 +4,9 @@ public class UserRegistrationException extends Exception{
 	
 	enum ExceptionType{
 		NAME_NULL,
-		NAME_INVALID
+		NAME_INVALID,
+		EMAIL_NULL,
+		EMAIL_INVALID
 	}
 	ExceptionType type;
 	
