@@ -46,10 +46,23 @@ public class UserRegistration {
 	}
 	
 	public static boolean validatePassword(String password) {
-		String passwordLengthValidation=".{8,}";
-		String passwordUpperCaseValidation="(?=.*[A-Z])";
-		String passwordSpecialCharValidation="(?=.*[@#$%^&+=])";
-		String passwordDigitValidation="(?=.*[0-9])";
-		return Pattern.matches(passwordValidation,password);
+		try {
+			String passwordLengthValidation=".{8,}";
+			String passwordUpperCaseValidation="(?=.*[A-Z])";
+			String passwordSpecialCharValidation="(?=.*[@#$%^&+=])";
+			String passwordDigitValidation="(?=.*[0-9])";
+			if(Pattern.matches("^"+passwordUpperCaseValidation+passwordDigitValidation+passwordSpecialCharValidation+passwordLengthValidation+"$",password))
+				return true;
+			else if(!Pattern.matches(passwordDigitValidation, password))
+				throw new UserRegistrationException("Enter at least one digit", ExceptionType.PASSWORD_DIGIT_MISSING);
+			else if(!Pattern.matches(passwordUpperCaseValidation, password))
+				throw new UserRegistrationException("Enter at least one uppercase letter", ExceptionType.PASSWORD_UPPERCASE_MISSING);
+			else if(!Pattern.matches(passwordSpecialCharValidation, password))
+				throw new UserRegistrationException("Enter at least one special character", ExceptionType.PASSWORD_SPECIALCHAR_MISSING);
+			else
+				throw new UserRegistrationException("Enter at least 8 characters",ExceptionType.PASSWORD_INVALID_LENGTH);
+		}catch(NullPointerException e) {
+			throw new UserRegistrationException("Enter password in proper format",ExceptionType.PASSWORD_NULL);
+		}
 	}
 }
