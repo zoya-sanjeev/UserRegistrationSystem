@@ -74,7 +74,7 @@ public class UserRegistrationTest {
         
         try {
         	UserRegistration userRegistration = new UserRegistration();
-			assertFalse(userRegistration.validateEmail("1ds@hsj.com"));
+			userRegistration.validateEmail("1ds@hsj.com");
 		} catch (UserRegistrationException e) {
 			Assert.assertEquals(UserRegistrationException.ExceptionType.EMAIL_INVALID, e.type);
 		}
@@ -83,11 +83,20 @@ public class UserRegistrationTest {
 	        
 		try {
 	        UserRegistration userRegistration = new UserRegistration();
-			assertFalse(userRegistration.validateEmail(null));
+			userRegistration.validateEmail(null);
 		} catch (UserRegistrationException e) {
 			Assert.assertEquals(UserRegistrationException.ExceptionType.EMAIL_NULL, e.type);
 		}
-	}	
+	}
+	@Test public void validateEmail_ValidEmail_True() {
+        
+		try {
+	        UserRegistration userRegistration = new UserRegistration();
+			Assert.assertEquals(userRegistration.validateEmail("abc@yahoo.com"),true);
+		} catch (UserRegistrationException e) {
+			
+		}
+	}
     @Test public void validatePhone_ValidPhone_True() {
         UserRegistration userRegistration = new UserRegistration();
         assertTrue(userRegistration.validatePhone("91 1234567890"));
