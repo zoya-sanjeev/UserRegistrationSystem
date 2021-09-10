@@ -24,15 +24,6 @@ public class UserRegistrationTest {
 		this.expectedOutput=expectedOutput;
 	}
 	
-	@Parameterized.Parameters
-	public static Collection input(){
-		return Arrays.asList(new Object[][] { { "abc@yahoo.com",true }, { "abc-100@yahoo.com",true }, { "abc.100@yahoo.com",true },
-			{ "abc111@abc.com",true }, { "abc-100@abc.net",true }, { "abc.100@abc.com.au",true }, { "abc@1.com",true },
-			{ "abc@gmail.com.com",true }, { "abc+100@gmail.com",true }, { "abc",false }, { "abc@.com.my",false }, { "abc123@gmail.a",false },
-			{ "abc123@.com",false }, { "abc123@.com.com",false }, { ".abc@abc.com",false }, { "abc()@gmail.com",false }, { "abc@%.com",false },
-			{ "abc..2002@gmail.com",false }, { "abc.@gmail.com",false }, { "abc@abc@gmail.com",false }, { "abc@gmail.com.1a",false },
-			{ "abc@gmail.com.aa.au",false } });
-	}
 	
     @Test public void validateName_ValidName_True() {
         
@@ -122,35 +113,94 @@ public class UserRegistrationTest {
 		}
     }
     @Test public void validatePassword_ValidPasswordLength_True() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Password1@#@"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertTrue(userRegistration.validatePassword("Password@123"));
+		} catch (UserRegistrationException e) {
+
+		}
     }
-    @Test public void validateEmail_InvalidPasswordLength_False() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validatePassword("passw"));
+    @Test public void validatePassword_InvalidPasswordLength_False() {
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			userRegistration.validatePassword("Pas@1");
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.PASSWORD_INVALID_LENGTH,e.type);
+		}
     }
     @Test public void validatePassword_PasswordWithOneUpperCase_True() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Password@123"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertTrue(userRegistration.validatePassword("Password@123"));
+		} catch (UserRegistrationException e) {
+			
+		}
     }
-    @Test public void validateEmail_PasswordWithNoUpperCase_False() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validatePassword("password"));
+    @Test public void validatePassword_PasswordWithNoUpperCase_False() {
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			userRegistration.validatePassword("pass1word@");
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.PASSWORD_UPPERCASE_MISSING,e.type);
+		}
     }
     @Test public void validatePassword_PasswordWithOneDigit_True() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Password1@"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertTrue(userRegistration.validatePassword("Password1@"));
+		} catch (UserRegistrationException e) {
+			
+		}
     }
-    @Test public void validateEmail_PasswordWithNoDigit_False() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validatePassword("password"));
+    @Test public void validatePassword_PasswordWithNoDigit_False() {
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			userRegistration.validatePassword("Password@");
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.PASSWORD_DIGIT_MISSING,e.type);
+		}
     }
     @Test public void validatePassword_PasswordWithOneSpecialCharacter_True() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePassword("Password1@#@"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertTrue(userRegistration.validatePassword("Password1@#@"));
+		} catch (UserRegistrationException e) {
+			
+		}
     }
-    @Test public void validateEmail_PasswordWithNoSpecialCharacter_False() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validatePassword("Password"));
+    @Test public void validatePassword_PasswordWithNoSpecialCharacter_False() {
+       
+        try {
+        	 UserRegistration userRegistration = new UserRegistration();
+			userRegistration.validatePassword("Passwor1d");
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.PASSWORD_SPECIALCHAR_MISSING,e.type);
+		}
     }
+    @Test public void validatePassword_NullPassword_False() {
+        
+        try {
+        	 UserRegistration userRegistration = new UserRegistration();
+			userRegistration.validatePassword(null);
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.PASSWORD_NULL,e.type);
+		}
+    }
+
+	@Parameterized.Parameters
+	public static Collection input(){
+		return Arrays.asList(new Object[][] { { "abc@yahoo.com",true }, { "abc-100@yahoo.com",true }, { "abc.100@yahoo.com",true },
+			{ "abc111@abc.com",true }, { "abc-100@abc.net",true }, { "abc.100@abc.com.au",true }, { "abc@1.com",true },
+			{ "abc@gmail.com.com",true }, { "abc+100@gmail.com",true }, { "abc",false }, { "abc@.com.my",false }, { "abc123@gmail.a",false },
+			{ "abc123@.com",false }, { "abc123@.com.com",false }, { ".abc@abc.com",false }, { "abc()@gmail.com",false }, { "abc@%.com",false },
+			{ "abc..2002@gmail.com",false }, { "abc.@gmail.com",false }, { "abc@abc@gmail.com",false }, { "abc@gmail.com.1a",false },
+			{ "abc@gmail.com.aa.au",false } });
+	}
 }
