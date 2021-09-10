@@ -98,12 +98,28 @@ public class UserRegistrationTest {
 		}
 	}
     @Test public void validatePhone_ValidPhone_True() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertTrue(userRegistration.validatePhone("91 1234567890"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertTrue(userRegistration.validatePhone("91 1234567890"));
+		} catch (UserRegistrationException e) {
+		}
     }
     @Test public void validateEmail_InvalidPhone_False() {
         UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validatePhone("1234 90191"));
+        try {
+			userRegistration.validatePhone("1234 90191");
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.PHONE_INVALID,e.type);
+		}
+    }
+    @Test public void validateEmail_NullPhone_False() {
+        UserRegistration userRegistration = new UserRegistration();
+        try {
+			userRegistration.validatePhone(null);
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.PHONE_NULL,e.type);
+		}
     }
     @Test public void validatePassword_ValidPasswordLength_True() {
         UserRegistration userRegistration = new UserRegistration();
