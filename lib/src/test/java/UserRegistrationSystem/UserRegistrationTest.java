@@ -62,14 +62,32 @@ public class UserRegistrationTest {
 		}
     }
     @Test public void validateEmail_ArrayOfValidAndInvalidEmails_TrueOrFalse() {
-        UserRegistration userRegistration = new UserRegistration();
-        System.out.println((count++) + email);
-        assertEquals(userRegistration.validateEmail(email),expectedOutput);
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertEquals(userRegistration.validateEmail(email),expectedOutput);
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.EMAIL_INVALID, e.type);
+		}
     }
     @Test public void validateEmail_InvalidEmail_False() {
-        UserRegistration userRegistration = new UserRegistration();
-        assertFalse(userRegistration.validateEmail("1ds@hsj.com"));
+        
+        try {
+        	UserRegistration userRegistration = new UserRegistration();
+			assertFalse(userRegistration.validateEmail("1ds@hsj.com"));
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.EMAIL_INVALID, e.type);
+		}
     }	
+	@Test public void validateEmail_NullEmail_False() {
+	        
+		try {
+	        UserRegistration userRegistration = new UserRegistration();
+			assertFalse(userRegistration.validateEmail(null));
+		} catch (UserRegistrationException e) {
+			Assert.assertEquals(UserRegistrationException.ExceptionType.EMAIL_NULL, e.type);
+		}
+	}	
     @Test public void validatePhone_ValidPhone_True() {
         UserRegistration userRegistration = new UserRegistration();
         assertTrue(userRegistration.validatePhone("91 1234567890"));
