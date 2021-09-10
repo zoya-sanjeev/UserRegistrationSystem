@@ -6,7 +6,9 @@ public class UserRegistrationException extends Exception{
 		NAME_NULL,
 		NAME_INVALID,
 		EMAIL_NULL,
-		EMAIL_INVALID
+		EMAIL_INVALID,
+		PHONE_NULL,
+		PHONE_INVALID
 	}
 	ExceptionType type;
 	
