@@ -5,10 +5,20 @@ package UserRegistrationSystem;
 
 import java.util.regex.Pattern;
 
+import UserRegistrationSystem.UserRegistrationException.ExceptionType;
+
 public class UserRegistration {
-	public boolean validateName(String name) {
+	public boolean validateName(String name)throws UserRegistrationException {
+		try {
 		String nameValidation="^[A-Z][a-z]{2,}$";
-		return Pattern.matches(nameValidation, name);
+		if(Pattern.matches(nameValidation, name))
+			return true;
+		else {
+			throw new UserRegistrationException("Enter name in proper format",ExceptionType.NAME_INVALID);
+		}
+		}catch(NullPointerException e) {
+			throw new UserRegistrationException("Enter name in proper format",ExceptionType.NAME_NULL);
+		}
 	}
 	
 	public static boolean validateEmail(String email) {

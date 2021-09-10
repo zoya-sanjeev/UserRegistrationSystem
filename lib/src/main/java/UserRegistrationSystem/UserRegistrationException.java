@@ -2,8 +2,15 @@ package UserRegistrationSystem;
 
 public class UserRegistrationException extends Exception{
 	
-	public UserRegistrationException() {
-		
+	enum ExceptionType{
+		NAME_NULL,
+		NAME_INVALID
+	}
+	ExceptionType type;
+	
+	public UserRegistrationException(String message, ExceptionType type ) {
+		super(message);
+		this.type=type;	
 	}
 
 }
