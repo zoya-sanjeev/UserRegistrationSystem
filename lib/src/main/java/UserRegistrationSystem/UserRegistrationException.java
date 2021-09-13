@@ -1,6 +1,6 @@
 package UserRegistrationSystem;
 
-public class UserRegistrationException extends Exception{
+public class UserRegistrationException extends RuntimeException{
 	
 	enum ExceptionType{
 		NAME_NULL,
