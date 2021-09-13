@@ -46,7 +46,7 @@ public class UserRegistration {
 	public static boolean validatePhone(String phoneNumber) throws UserRegistrationException {
 		try {
 			String phoneValidation="^[0-9]{2,3}\\s[0-9]{10}$";
-			if(Pattern.matches(phoneValidation,phoneNumber))
+			if(UserRegistration.validateInput.validate(phoneValidation,phoneNumber ))
 				return true;
 			else
 				throw new UserRegistrationException("Enter phone number in proper format",ExceptionType.PHONE_INVALID);
