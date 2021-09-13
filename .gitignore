@@ -14,3 +14,4 @@ lib/.classpath
 lib/.project
 .project
 lib/build.gradle
+/bin/

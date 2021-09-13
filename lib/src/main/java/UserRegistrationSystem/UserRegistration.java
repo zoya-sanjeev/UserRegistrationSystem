@@ -4,14 +4,24 @@
 package UserRegistrationSystem;
 
 import java.util.regex.Pattern;
-
 import UserRegistrationSystem.UserRegistrationException.ExceptionType;
 
+@FunctionalInterface
+interface IValidate{
+	boolean validate(String regex,String input);
+}
+
+
 public class UserRegistration {
+	static IValidate validateInput=(String regex, String input)->{
+		boolean result=Pattern.matches(regex,input);
+		return result;
+	};
+	
 	public boolean validateName(String name)throws UserRegistrationException {
 		try {
 		String nameValidation="^[A-Z][a-z]{2,}$";
-		if(Pattern.matches(nameValidation, name))
+		if(UserRegistration.validateInput.validate(nameValidation, name))
 			return true;
 		else {
 			throw new UserRegistrationException("Enter name in proper format",ExceptionType.NAME_INVALID);
@@ -24,7 +34,7 @@ public class UserRegistration {
 	public static boolean validateEmail(String email) throws UserRegistrationException {
 		try {
 		String emailValidation="^[a-zA-Z]{1,}([\\.\\_\\-\\+]?[a-zA-Z0-9]+)@[a-z0-9]+[.][a-z]+[.]?[a-z]{2,3}?$";
-		if(Pattern.matches(emailValidation,email))
+		if(UserRegistration.validateInput.validate(emailValidation, email))
 			return true;
 		else
 			throw new UserRegistrationException("Enter email in proper format", ExceptionType.EMAIL_INVALID);
